@@ -13,13 +13,13 @@ body{
     justify-content: center;
 }
 
-.container{
+.con{
     width: 600px;
     height: 700px;
     box-shadow: rgb(149, 149, 149) 5px 5px 20px;
 }
 
-.score-container{
+.score-con{
     width: 600px;
     height: 100px;
     background-color: rgb(33, 33, 33);
@@ -31,7 +31,7 @@ body{
     font-size: 22px;
 }
 
-.game-container{
+.game-con{
     width: 600px;
     height: 600px;
     background-color: white;
@@ -42,4 +42,8 @@ body{
 .food{
     background-color: rgb(164, 249, 35);
     border-radius: 50%;
+}
+
+.snake{
+    background-color: red;
 }
