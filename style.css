@@ -15,8 +15,6 @@ body{
 }
 
 .txt-con{
-    width: 600px;
-    height: 80px;
     font-size: 30px;
     color: rgb(0, 160, 229);
     display:flex;
