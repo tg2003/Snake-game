@@ -5,6 +5,9 @@ let velocityX=0,velocityY=0;
 let snakeBody=[];
 let score=0;
 let scoreCon = document.querySelector(".score-con");
+let gameInterval;
+
+
 
 function generateFood(){
     foodX= Math.floor(Math.random()*25)+1;
@@ -16,6 +19,11 @@ function generateFood(){
     }
 }
 
+function startGame(speed){
+    clearInterval(gameInterval);// stop old speed
+    gameInterval= setInterval(renderGame,speed);
+}
+
 function renderGame(){
     let updatedgame = `<div class="food" style="grid-area: ${foodY}/${foodX}"></div>`;
     if(headX==foodX && headY==foodY){
@@ -25,10 +33,25 @@ function renderGame(){
         scoreCon.innerHTML= "Score : "+score; 
     }
 
+    //increase speed of snake according to the Score
+    if (score===0){
+            startGame(150);
+        }
+    else if (score>=100){
+        startGame(110);
+    }
+    else if (score>=200){
+        startGame(80);
+    }
+    else if (score>=400){
+        startGame(50);
+    }
+
     snakeBody.pop();// when snakeBody.unshift, the snake is getting longer by keeping its starting point same.so we use pop() to remove the last point from the tail of the snake 
     headX+=velocityX;
     headY+=velocityY;
     snakeBody.unshift([headX,headY]);//to increase the length of snake 
+    
     if(headX==0 || headY==0 || headX==26 || headY==26){
         gameOver();
     }
@@ -42,8 +65,9 @@ function renderGame(){
     for(let i=0;i<snakeBody.length;i++){
         updatedgame += `<div class="snake" style="grid-area: ${snakeBody[i][1]}/${snakeBody[i][0]}"></div>`;
     }
-    
+
     gameCon.innerHTML=updatedgame; // This shows the updated state (Frame) of Food + Head
+    
 }
 
 function gameOver(){
@@ -58,8 +82,7 @@ function gameOver(){
     snakeBody=[];
 }
 
-generateFood();
-setInterval(renderGame,150);
+
 
 document.addEventListener("keydown",function(e){
     console.log(e.key);
@@ -82,3 +105,7 @@ document.addEventListener("keydown",function(e){
         velocityY=0;
     }
 });
+
+generateFood();
+renderGame();
+startGame();
