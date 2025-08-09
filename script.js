@@ -82,8 +82,6 @@ function gameOver(){
     snakeBody=[];
 }
 
-
-
 document.addEventListener("keydown",function(e){
     console.log(e.key);
     let key=e.key;
